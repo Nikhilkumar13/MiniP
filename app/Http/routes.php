@@ -14,6 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/data/', 'IncidentController@getData');
+Route::post('/savedata/','IncidentController@saveData');
 Route::get('/map', function () {
 
 	$ipAddress = $_SERVER['REMOTE_ADDR'];
