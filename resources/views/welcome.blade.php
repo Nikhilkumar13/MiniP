@@ -15,9 +15,11 @@
   <nav class="light-blue lighten-1" role="navigation">
 <!--     <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
  -->     
+
        <ul class="right hide-on-med-and-down">
-        <li><a href="#">Sign Up</a></li>
-        <li><a href="#">Sign In</a></li>
+        <li><a class="modal-trigger waves-effect waves-light btn" href="#signup">Sign Up</a></li>
+        <li><a class="modal-trigger waves-effect waves-light btn" href="#login">Login</a></li>
+        <!-- <li><a href="#">Sign In</a></li> -->
 
       </ul>
 
@@ -103,7 +105,12 @@
         <button type="button" onclick="saveData(); return false;" class="waves-effect waves-light btn">Save</button>
       </div>
 
-      <!-- <div class="row">
+        <!-- Modal Trigger -->
+  
+
+
+
+      <!--<div class="row">
         <div class="input-field col s12">
           <input disabled value="I am not editable" id="disabled" type="text" class="validate">
           <label for="disabled">Disabled</label>
@@ -126,11 +133,82 @@
         
 
   </div>  
+  <!-- signup Modal Structure -->
+  <div id="signup" class="modal modal-fixed-footer" style="width: 40%;height: 61%;">
+    <div class="modal-content" style="height: 100%;">
+      <form class="col s12">
+        <h3>Sign Up</h3>
+        <div class="row">
+          <div class="input-field col s6">
+            <input  id="first_name" type="text" class="validate">
+            <label for="first_name">First Name</label>
+          </div>
+          <div class="input-field col s6">
+            <input  id="last_name" type="text" class="validate">
+            <label for="last_name">Last Name</label>
+          </div>
+        </div>
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="password" type="password" class="validate">
+          <label for="password">Password</label>
+        </div>
+      </div>
+      <div class="modal-footer" style="position:inherit;">
+          <div class="input-field">
+              <button class="modal-action modal-close waves-effect waves-light btn" onclick="">SignUP</button>
+              <button class="waves-effect waves-light btn-flat" value="Reset" type="reset">Reset</button>
+            <!-- <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a> -->
+        </div>
+      </div>
+      </form>
+    </div>
+  </div>
+  <!-- login Modal Structure -->
+  <div id="login" class="modal modal-fixed-footer" style="height: 61%;width: 40%;">
+    <div class="modal-content">
+      <form class="col s12">
+        <h3>Login</h3>
+<!--         <div class="row">
+          <div class="input-field col s6">
+            <input placeholder="Enter First name" id="first_name" type="text" class="validate">
+            <label for="first_name">First Name</label>
+          </div>
+          <div class="input-field col s6">
+            <input placeholder="Enter last name" id="last_name" type="text" class="validate">
+            <label for="last_name">Last Name</label>
+          </div>
+        </div> -->
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="password" type="password" class="validate">
+          <label for="password">Password</label>
+        </div>
+      </div>
+      <div class="modal-footer" style="position:inherit;">
+          <div class="input-field">
+              <button class="modal-action modal-close waves-effect waves-light btn" onclick="">Login</button>
+              <button class="waves-effect waves-light btn-flat" value="Reset" type="reset">Reset</button>
+            <!-- <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a> -->
+        </div>
+      </div>
+      </form>
+    </div>
+  </div>
       
 
   <div  style="width: 1100px; height: 550px; float:right; margin-right:0px; margin-bottom:0px; " class="container" id ="map" >
       
       <script>
+
 
 var map = null;
 var marker=null;
@@ -233,6 +311,7 @@ $(document).ready(function()
   <script src="{{asset('js/init.js')}}"></script>
 <script src="{{asset('js/locationpicker.jquery.js')}}"></script>
 
+
 <script language="javascript" type="text/javascript">
   function getData(type) {
       $.ajax({
@@ -329,4 +408,9 @@ $(document).ready(function() {
  
    </script>
   
-
+<script>
+        $(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal-trigger').leanModal();
+  });
+</script>
