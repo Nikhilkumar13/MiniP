@@ -12,9 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome',['sdate' => 'lol']);
 });
-Route::get('/data/', 'IncidentController@getData');
+Route::get('/try', function () {
+    return view('try');
+});
+Route::get('/mapdata/', 'IncidentController@getMapData');
+Route::get('/graphdata/', 'IncidentController@getGraphData');
 Route::post('/savedata/','IncidentController@saveData');
 Route::get('/map', function () {
 
