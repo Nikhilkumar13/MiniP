@@ -18,14 +18,15 @@
 
 
       </head>
-      <body style="">
+      <body>
 
+        <!-- <div class="container"> -->
+        <!-- <div class="row"> -->  
 
+        <div  class="row">
 
-        <div  class"left" style="width:15%; height:615px;border:1px solid black;float:left">
-          <div style='height:100%;overflow-x:hidden;float:left' >
-
-           <ul  id= "menu" class="collapsible" data-collapsible="accordion" style=" margin-top:-1%;margin-right:-8%; ">
+          <div class="col s2 ">
+           <ul  id= "menu" class="collapsible" data-collapsible="accordion">
             <li>
               <div class="collapsible-header"><i class="material-icons">filter_drama</i>Dengue </div>
               <div class="collapsible-body">
@@ -50,123 +51,126 @@
           </li>
 
         </ul>
-
-
-
-
-        <div id ="registerform" class="container" style="display:none;">
-          <form >
-            <div class="row">
-              <div class="input-field col s12">
-                <input placeholder="Location" id="location" type="text" class="validate">
-                <!-- <label for="location">Location</label> -->
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <select id="type">
-                  <!-- <option value="" disabled selected>Choose your option</option> -->
-                  <option value="mosquito">Mosquito Bite</option>
-                  <option value="dog">Dog Bite</option>
-                </select>
-              </div>
-
-            </div>
-
-            <div class="row">
-              <div class="input-field col s12">
-                <input placeholder="lat" id="lat" type="text" class="validate">
-                <!-- <label for="lat">Lat</label> -->
-              </div>
-
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input placeholder="lng" id="lng" type="text" class="validate">
-                <!-- <label for="lng">Long</label> -->
-              </div>
-
-            </div>
-            <div class="col  l5 blue-text text-darken-2 ">
-              <input type="date" class="datepicker center-align" value="<?php echo date("d-M-Y"); ?>" id="idate" placeholder="Date" style="margin:5px;">
-            </div>
-            <div class="row">
-
-              <button type="button" onclick="saveData(); return false;" class="waves-effect waves-light btn">Save</button>
-              <button type="button" onclick="back(); return false;" class="waves-effect waves-light btn">Back</button>
-
-            </div>
-
-          </form>
-        </div>
-
       </div>
 
-    </div>  
 
 
 
-
-    <!-- signup Modal Structure -->
-
-    <div  class="container" id="graphContainer" style="height: 400px; width: 1100px;display:none">
-
-    </div>
-
-
-
-    <div  style="width: 84%;height: 78%; float:right; margin-right:0px; margin-bottom:0px; margin-top:0px; margin-right:2px; ">
-
-      <div class="row no-padding left" style="position:relative;z-index:1;padding-left:px;">
-        <!-- <div class="row"> -->
-        <div class="col l7 m7 no-padding " >
-          <div class="row card-panel hoverable  no-padding">
-            <div class="col l5 blue-text  text-darken-2 ">
-              <input type="date" class="datepicker center-align" value="<?php echo date('d-M-Y', strtotime("-1 months", strtotime("NOW"))); ?>" id="sdate"  style="margin:5px;border-bottom:0px;">
+      <div id ="registerform" class="col s2" style="display:none;">
+        <form >
+          <div class="row">
+            <div class="input-field col s12">
+              <input placeholder="Location" id="location" type="text" class="validate">
+              <!-- <label for="location">Location</label> -->
             </div>
-            <div class="col l2 center-align text-darken-2 ">
-              <p>to</p>
-            </div>
-            <div class="col  l5 blue-text text-darken-2 ">
-              <input type="date" class="datepicker center-align" value="<?php echo date("d-M-Y"); ?>" id="edate" placeholder="End Date" style="margin:5px;border-bottom:0px;">
-            </div>
-            <!-- </div> -->
           </div>
-        </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <select id="type">
+                <!-- <option value="" disabled selected>Choose your option</option> -->
+                <option value="mosquito">Mosquito Bite</option>
+                <option value="dog">Dog Bite</option>
+              </select>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="input-field col s12">
+              <input placeholder="lat" id="lat" type="text" class="validate">
+              <!-- <label for="lat">Lat</label> -->
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input placeholder="lng" id="lng" type="text" class="validate">
+              <!-- <label for="lng">Long</label> -->
+            </div>
+
+          </div>
+          <div class="col  l5 blue-text text-darken-2 ">
+            <input type="date" class="datepicker center-align" value="<?php echo date("d-M-Y"); ?>" id="idate" placeholder="Date" style="margin:5px;">
+          </div>
+          <div class="row">
+
+            <button type="button" onclick="saveData(); return false;" class="waves-effect waves-light btn">Save</button>
+            <button type="button" onclick="back(); return false;" class="waves-effect waves-light btn">Back</button>
+
+          </div>
+
+        </form>
       </div>
 
-      <div class="container" id ="map" style="position:absolute;width: 84%;height: 96%;border:1px solid black;margin-bottom:-10px" >
 
 
-        <script>
 
-        var map = null;
-        var marker=null;
-        var markers=[];
-        var mosImage= "{{asset('/images/marker.png')}}";
-        var mapData=null;
-        var mapDataType="mosquito";
-        var heatmap=null;
-        var state= 0;
 
-        function initMap() {
-          var myLatLng = {lat: 28.54539, lng: 77.188181};
-          map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 17,
-            disableDefaultUI:true,
-            center:myLatLng,
-            zoomControl:true,
-            rotateControl:true
-          });
-      // map.setTilt(45);
-      // map.setHeading(map.getHeading()||0+45);
 
-      marker = new google.maps.Marker({
-        position: myLatLng,
-        map: map,
-        title: 'IIT Delhi',
-        draggable: true,
-      });
+
+      <!-- signup Modal Structure -->
+
+      <div  class="col s10 " id="graphContainer" style="height: 400px; width: 1100px;display:none">
+
+      </div>
+
+
+
+      <div class="col s10 no-padding" style="height: 78%;">
+        <div class="row">
+
+          <div class="col s3" style="position:relative;z-index:1;">
+            <!-- <div class="row"> -->
+            <!-- <div class="col l6 s6 no-padding " > -->
+            <div class="row card-panel  hoverable  no-padding">
+              <div class="col s5 no-padding ">
+
+                <input type="date" class="datepicker center-align  blue-text text-darken-2" value="<?php echo date('d-M-Y', strtotime("-1 months", strtotime("NOW"))); ?>" id="sdate"  style="margin:5px;border-bottom:0px;">
+              </div>
+
+
+              <div class="col s2  no-padding ">
+                <p class=" center-align text-darken-2 ">to</p>
+              </div>
+
+              <div class="col s5 no-padding">
+                <input type="date" class="datepicker center-align blue-text text-darken-2" value="<?php echo date("d-M-Y"); ?>" id="edate" placeholder="End Date" style="margin:5px;border-bottom:0px;">
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col s10 no-padding" id ="maap" style="position:absolute;height:96%;margin-right:2px;border:1px solid black;" >
+
+
+            <script>
+
+            var map = null;
+            var marker=null;
+            var markers=[];
+            var mosImage= "{{asset('/images/marker.png')}}";
+            var mapData=null;
+            var mapDataType="mosquito";
+            var heatmap=null;
+            var state= 0;
+
+            function initMap() {
+              var myLatLng = {lat: 28.54539, lng: 77.188181};
+              map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 17,
+                disableDefaultUI:true,
+                center:myLatLng,
+                zoomControl:true,
+                rotateControl:true
+              });
+
+
+              marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: 'IIT Delhi',
+                draggable: true,
+              });
       // getLocation();
     }
 
@@ -198,6 +202,8 @@
 
   </div>
 </div>
+</div>
+</div>  
 
 
 
@@ -211,16 +217,17 @@
 </footer>
 
 
+<!-- </div> -->
 
+<!-- </div> -->
 
 
 </body>
 </html>
 
 <!--  Scripts-->
-
-<script async defer src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_MAP_KEY','null')}}&signed_in=false&libraries=visualization&callback=initMap"></script> </script>
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_MAP_KEY','null')}}&signed_in=false&libraries=visualization&callback=initMap"></script> </script>
 <script src="{{asset('/js/moment.js')}}"></script>
 
 <script src="{{asset('/js/pikaday.js')}}"></script>
@@ -365,7 +372,6 @@ $(document).ready(function()
     <script src="{{asset('/js/materialize.js')}}"></script>
     <script src="{{asset('js/init.js')}}"></script>
     <script src="{{asset('/js/locationpicker.jquery.js')}}"></script>
-    <!-- <script src="{{asset('/js/nouislider.js')}}"></script> -->
     <script src="{{asset('/js/jquery.canvasjs.min.js')}}"></script>
     <script src="{{asset('/js/canvasjs.min.js')}}"></script>
     <script src="{{asset('/js/bootstrap-slider.min.js')}}"></script>
