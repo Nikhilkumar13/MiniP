@@ -20,226 +20,225 @@
       </style>
 
       <script src="https://code.highcharts.com"></script>
-  
+      
 
 
-      </head>
-      <body>
+    </head>
+    <body>
 
       
 
-        <div  class="row">
+      <div  class="row">
 
-          <div class="col s2 " >
-           <ul  id= "menu" class="collapsible" data-collapsible="accordion">
-            <li>
-              <div class="collapsible-header"><i class="material-icons">filter_drama</i>Dengue </div>
-              <div class="collapsible-body">
-                <ul>
-                  <li class="collapsible-header" style="margin-left:40px"><a type="button"  id ="reloadMap1"><i class="material-icons">places</i>Show Map</a></li>
-                  <li class="collapsible-header" style="margin-left:35px" ><a type="button"  id ="reloadGraph1"><i class="material-icons">trending_up</i>Graphs</a></li>
-                  <li class="collapsible-header" style="margin-left:35px" ><a type="button"  id ="reloadHeatMap1"><i class="material-icons">trending_up</i>Heat Maps</a></li>
-                </ul>
-              </div>
-            </li>
-            <li>
-              <div class="collapsible-header"><i class="material-icons">place</i>Dog Bites</div>
-              <div class="collapsible-body"><ul>
-                <li class="collapsible-header" style="margin-left:40px"><a type="button"  id ="reloadMap2"><i class="material-icons">places</i>Show Map</a></li>
-                <li class="collapsible-header" style="margin-left:35px" ><a type="button"  id ="reloadGraph2"><i class="material-icons">trending_up</i>Graphs</a></li>
-                <li class="collapsible-header" style="margin-left:35px" ><a type="button"  id ="reloadHeatMap2"><i class="material-icons">trending_up</i>Heat Maps</a></li>
+        <div class="col s2 " >
+         <ul  id= "menu" class="collapsible" data-collapsible="accordion">
+          <li>
+            <div class="collapsible-header"><i class="material-icons">filter_drama</i>Dengue </div>
+            <div class="collapsible-body">
+              <ul>
+                <li class="collapsible-header" style="margin-left:40px"><a type="button"  id ="reloadMap1"><i class="material-icons">places</i>Show Map</a></li>
+                <li class="collapsible-header" style="margin-left:35px" ><a type="button"  id ="reloadGraph1"><i class="material-icons">trending_up</i>Graphs</a></li>
+                <li class="collapsible-header" style="margin-left:35px" ><a type="button"  id ="reloadHeatMap1"><i class="material-icons">trending_up</i>Heat Maps</a></li>
               </ul>
             </div>
           </li>
           <li>
-            <div class="collapsible-header"><a style="color:black"   onclick="register(); return false;" ><i style="color:black" class="material-icons">receipt</i>Report Incident</a></div>
-          </li>
+            <div class="collapsible-header"><i class="material-icons">place</i>Dog Bites</div>
+            <div class="collapsible-body"><ul>
+              <li class="collapsible-header" style="margin-left:40px"><a type="button"  id ="reloadMap2"><i class="material-icons">places</i>Show Map</a></li>
+              <li class="collapsible-header" style="margin-left:35px" ><a type="button"  id ="reloadGraph2"><i class="material-icons">trending_up</i>Graphs</a></li>
+              <li class="collapsible-header" style="margin-left:35px" ><a type="button"  id ="reloadHeatMap2"><i class="material-icons">trending_up</i>Heat Maps</a></li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header"><a style="color:black"   onclick="register(); return false;" ><i style="color:black" class="material-icons">receipt</i>Report Incident</a></div>
+        </li>
 
-        </ul>
+      </ul>
+    </div>
+
+
+
+
+    <div id ="registerform" class="col s2" style="display:none;">
+      <form >
+       <div class="row">
+        
+        
+       </div>
+
+       <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="Location" id="location" type="text" class="validate truncate">
+          <label for="Location">Location</label>
+        </div>
       </div>
 
 
-
-
-      <div id ="registerform" class="col s2" style="display:none;">
-        <form >
-           <div class="row">
-            
-            
-          </div>
-
-          <div class="row">
-            <div class="input-field col s12">
-              <input placeholder="Location" id="location" type="text" class="validate truncate">
-              <label for="Location">Location</label>
-            </div>
-          </div>
-
-
-           <div class="row">
-            <div class="input-field col s6 ">
-              <input placeholder="lat" id="lat" type="text" class="validate truncate" >
-              
-              <label for="lat">Lat</label>
-            </div>
-            <div class="input-field col s6">
-              <input placeholder="lng" id="lng" type="text" class="validate truncate">
-                            <label for="lng">Long</label>
-
-
-            </div>
-
-
-          </div>
-
-
-          <div class="row" id= "type">
-            <div class="col s6">
-            <input name="group1" type="radio"  value ="mosquito" id="test1" checked />
-
-              <label for="test1">Mosquito</label>
-            </div>
-
-              <div class="col s6">
-              <input name="group1"  type="radio" value ="dog"  id="test2" />
-            
-              <label for="test2">Dog</label>
-            </div>
-
-
-          </div>
-
-          <div class="row">
-
-             
-            <div class="col s6  blue-text  ">
-               <p style="font-size:17px">Date:</p>
-            </div>
-            <div class="col s6   blue-text text-darken-2 no-padding">
-              <input placeholder="idate" type="date" class="datepicker tooltipped center-align" data-position="bottom" data-delay="50" data-tooltip="Click here to input date of the day you got bitten" value="<?php echo date("d-M-Y"); ?>" id="idate">
-            </div>
-           
-
+      <div class="row">
+        <div class="input-field col s6 ">
+          <input placeholder="lat" id="lat" type="text" class="validate truncate" >
           
-          </div>
+          <label for="lat">Lat</label>
+        </div>
+        <div class="input-field col s6">
+          <input placeholder="lng" id="lng" type="text" class="validate truncate">
+          <label for="lng">Long</label>
 
-         
 
-         
-          
-          <div class="row">
+        </div>
 
-            <div class="divider"></div>
-            
-          <div class="section">
-            <button type="button" onclick="saveData(); return false;" class=" btn tooltipped waves-effect waves-light btn col s5 right" data-position="bottom" data-delay="50" data-tooltip="Click me to Save Current Information filled">Save</button>
-            <button type="button" onclick="back(); return false;" class="waves-effect tooltipped waves-light btn col s5 left" data-position="bottom" data-delay="50" data-tooltip="Click me to go back to previous panel">Back</button>
 
-          </div>
-          </div>
-
-        </form>
       </div>
 
 
+      <div class="row" id= "type">
+        <div class="col s6">
+          <input name="group1" type="radio"  value ="mosquito" id="test1" checked />
+
+          <label for="test1">Mosquito</label>
+        </div>
+
+        <div class="col s6">
+          <input name="group1"  type="radio" value ="dog"  id="test2" />
+          
+          <label for="test2">Dog</label>
+        </div>
 
 
+      </div>
 
+      <div class="row">
 
-
-
+       
+        <div class="col s6  blue-text  ">
+         <p style="font-size:17px">Date:</p>
+       </div>
+       <div class="col s6   blue-text text-darken-2 no-padding">
+        <input placeholder="idate" type="date" class="datepicker tooltipped center-align" data-position="bottom" data-delay="50" data-tooltip="Click here to input date of the day you got bitten" value="<?php echo date("d-M-Y"); ?>" id="idate">
+      </div>
       
 
+      
+    </div>
 
+    
 
-      <div class="col s10 no-padding" style="height: 78%;">
-        <div class="row">
+    
+    
+    <div class="row">
 
-          <div  id = "datepanel" class="col s3" style="position:relative;z-index:1;">
-           
-            <div class="row card-panel  hoverable  no-padding">
-              <div class="col s5 no-padding ">
-
-                <input type="date" class="datepicker center-align  blue-text text-darken-2" value="<?php echo date('d-M-Y', strtotime("-1 months", strtotime("NOW"))); ?>" id="sdate"  style="margin:5px;border-bottom:0px;">
-              </div>
-
-
-              <div class="col s2  no-padding ">
-                <p class=" center-align text-darken-2 ">to</p>
-              </div>
-
-              <div class="col s5 no-padding">
-                <input type="date" class="datepicker center-align blue-text text-darken-2" value="<?php echo date("d-M-Y"); ?>" id="edate" placeholder="End Date" style="margin:5px;border-bottom:0px;">
-              </div>
-
-            </div>
-          </div>
-          <div  class="col s10  no-padding" id="graphContainer" style="height: 400px;display:none">
+      <div class="divider"></div>
+      
+      <div class="section">
+        <button type="button" onclick="saveData(); return false;" class=" btn tooltipped waves-effect waves-light btn col s5 right" data-position="bottom" data-delay="50" data-tooltip="Click me to Save Current Information filled">Save</button>
+        <button type="button" onclick="back(); return false;" class="waves-effect tooltipped waves-light btn col s5 left" data-position="bottom" data-delay="50" data-tooltip="Click me to go back to previous panel">Back</button>
 
       </div>
+    </div>
 
-          <div class="col s10 no-padding "  style="position:absolute;height:96%;" >
-            <div class="col s12 center  no-padding" id ="map" style="height:100%;" >
-
-
-              <script>
-
-              var map = null;
-              var marker=null;
-              var markers=[];
-              var mosImage= "{{asset('/images/marker.png')}}";
-              var mapData=null;
-              var mapDataType="mosquito";
-              var heatmap=null;
-              var state= 0;
-
-              function initMap() {
-                var myLatLng = {lat: 28.54539, lng: 77.188181};
-                map = new google.maps.Map(document.getElementById('map'), {
-                  zoom: 16,
-                  center:myLatLng,
-                  zoomControl:true,
-                  rotateControl:true,
-                });
-
-
-                marker = new google.maps.Marker({
-                  position: myLatLng,
-                  map: map,
-                  title: 'IIT Delhi',
-                  draggable: true,
-                });
-    }
-
-    function getLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-          console.log({lat: position.coords.latitude, lng: position.coords.longitude});
-          map.setCenter({lat: position.coords.latitude, lng: position.coords.longitude});
-          marker.setPosition({lat: position.coords.latitude, lng: position.coords.longitude});
-
-        } , error,options);
-      }
-    }
-
-    function error(err) {
-      console.warn('ERROR(' + err.code + '): ' + err.message);
-    };
-
-    var options = {
-      enableHighAccuracy: true,
-      timeout: 5000,
-      maximumAge: 0
-    };
+  </form>
+</div>
 
 
 
 
-    </script>
 
+
+
+
+<div  class="col s10  no-padding" id="graphContainer" style="height: 400px; display:none">
+
+</div>
+
+
+
+<div class="col s10 no-padding" style="height: 78%;">
+  <div class="row">
+
+    <div  id = "datepanel" class="col s3" style="position:relative;z-index:1;">
+     
+      <div class="row card-panel  hoverable  no-padding">
+        <div class="col s5 no-padding ">
+
+          <input type="date" class="datepicker center-align  blue-text text-darken-2" value="<?php echo date('d-M-Y', strtotime("-1 months", strtotime("NOW"))); ?>" id="sdate"  style="margin:5px;border-bottom:0px;">
+        </div>
+
+
+        <div class="col s2  no-padding ">
+          <p class=" center-align text-darken-2 ">to</p>
+        </div>
+
+        <div class="col s5 no-padding">
+          <input type="date" class="datepicker center-align blue-text text-darken-2" value="<?php echo date("d-M-Y"); ?>" id="edate" placeholder="End Date" style="margin:5px;border-bottom:0px;">
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col s10 no-padding "  style="position:absolute;height:96%;" >
+      <div class="col s12 center  no-padding" id ="map" style="height:100%;" >
+
+
+        <script>
+
+        var map = null;
+        var marker=null;
+        var markers=[];
+        var mosImage= "{{asset('/images/marker.png')}}";
+        var mapData=null;
+        var mapDataType="mosquito";
+        var heatmap=null;
+        var state= 0;
+
+        function initMap() {
+          var myLatLng = {lat: 28.54539, lng: 77.188181};
+          map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 16,
+            center:myLatLng,
+            zoomControl:true,
+            rotateControl:true,
+          });
+
+
+          marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            title: 'IIT Delhi',
+            draggable: true,
+          });
+        }
+
+        function getLocation() {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+              console.log({lat: position.coords.latitude, lng: position.coords.longitude});
+              map.setCenter({lat: position.coords.latitude, lng: position.coords.longitude});
+              marker.setPosition({lat: position.coords.latitude, lng: position.coords.longitude});
+
+            } , error,options);
+          }
+        }
+
+        function error(err) {
+          console.warn('ERROR(' + err.code + '): ' + err.message);
+        };
+
+        var options = {
+          enableHighAccuracy: true,
+          timeout: 5000,
+          maximumAge: 0
+        };
+
+
+
+
+        </script>
+
+      </div>
+    </div>
   </div>
-</div>
-</div>
 </div>
 </div>  
 
@@ -296,24 +295,24 @@ $(document).ready(function()
 
   });
   $("#sdate").on('change',function(){
-          
-            if(state==0)
-            {
-              getData(mapDataType);
-            }
-            if(state==1)
-            {
-              showGraph(mapDataType);
+    
+    if(state==0)
+    {
+      getData(mapDataType);
+    }
+    if(state==1)
+    {
+      showGraph(mapDataType);
 
-            }
-            if(state==2)
-            {
-              showHeatMap(mapDataType);
+    }
+    if(state==2)
+    {
+      showHeatMap(mapDataType);
 
-            }
+    }
 
 
-          });
+  });
 
   $("#edate").on('change',function(){
     if(state==0)
@@ -336,32 +335,32 @@ $(document).ready(function()
 
   $("#reloadMap2").on('click', function() {
 
-            document.getElementById("map").style.display = "";
-            document.getElementById("graphContainer").style.display = "none"
+    document.getElementById("map").style.display = "";
+    document.getElementById("graphContainer").style.display = "none"
 
-            getData(mapDataType);
-
-
-
-          });
-
-
-    var picker1 = new Pikaday({ field: document.getElementById('sdate'),
-      format: 'D-MMM-YYYY',
-      defaultDate:'today' });
-    var picker2 = new Pikaday({ field: document.getElementById('edate'),
-      format: 'D-MMM-YYYY',
-      defaultDate:'today'
-    });
-    var picker3 = new Pikaday({ field: document.getElementById('idate'),
-      format: 'D-MMM-YYYY',
-      defaultDate:'today'
-    });
+    getData(mapDataType);
 
 
 
+  });
 
-    $("#reloadGraph1").on('click', function() {
+
+  var picker1 = new Pikaday({ field: document.getElementById('sdate'),
+    format: 'D-MMM-YYYY',
+    defaultDate:'today' });
+  var picker2 = new Pikaday({ field: document.getElementById('edate'),
+    format: 'D-MMM-YYYY',
+    defaultDate:'today'
+  });
+  var picker3 = new Pikaday({ field: document.getElementById('idate'),
+    format: 'D-MMM-YYYY',
+    defaultDate:'today'
+  });
+
+
+
+
+  $("#reloadGraph1").on('click', function() {
             // console.log('cbekvbhwv');
             showGraph('mosquito');
 
@@ -369,14 +368,14 @@ $(document).ready(function()
 
           });
 
-    $("#reloadGraph2").on('click', function() {
+  $("#reloadGraph2").on('click', function() {
             // console.log('cbekvbhwv');
             showGraph('dog');
 
 
 
           });
-    $("#reloadHeatMap1").on('click', function() {
+  $("#reloadHeatMap1").on('click', function() {
             // console.log('cbekvbhwv');
             showHeatMap('mosquito');
 
@@ -642,10 +641,15 @@ $(document).ready(function()
         }
 
         document.getElementById("menu").style.display = "none";
-                document.getElementById("datepanel").style.display = "none";
+        document.getElementById("datepanel").style.display = "none";
         document.getElementById("registerform").style.display = "";
+        document.getElementById("graphContainer").style.display = "none"; 
+        document.getElementById("map").style.display = ""; 
+        heatmap.setMap(null);
 
-    google.maps.event.addListener(map, 'click', function(event) {                
+
+
+        google.maps.event.addListener(map, 'click', function(event) {                
             //Get the location that the user clicked.
             var clickedLocation = event.latLng;
             console.log(event);
@@ -668,11 +672,11 @@ $(document).ready(function()
               }
 
 
-            markerLocation();
-          });
-  }
+              markerLocation();
+            });
+      }
 
-  function markerLocation(){
+      function markerLocation(){
         //Get location.
         var currentLocation = marker.getPosition();
         //Add lat and lng values to a field that we can save.
@@ -697,19 +701,19 @@ $(document).ready(function()
 
       function saveData() {
 
-         
-          var formData={
-            'type' : $('#type').val(),
-            'lat':$('#lat').val(),
-            'lng':$('#lng').val(),
-            'radius': 5         
-          };
-          console.log(formData);
-          $.ajax({
-            url: '/savedata/',
-            type: 'POST',
-            data: formData,
-            success: function(data) {
+       
+        var formData={
+          'type' : $('#type').val(),
+          'lat':$('#lat').val(),
+          'lng':$('#lng').val(),
+          'radius': 5         
+        };
+        console.log(formData);
+        $.ajax({
+          url: '/savedata/',
+          type: 'POST',
+          data: formData,
+          success: function(data) {
       // console.log(data);
         // addData(data);
         // alert('data added');
@@ -723,31 +727,31 @@ $(document).ready(function()
     }
 
   });
-        }
+      }
 
-        function signUp()
-        {
+      function signUp()
+      {
 
-          var formData={
-            'name' : $('#name').val(),
-            'email':$('#email').val(),
-            'password':$('#password').val(),
-            'password_confirmation':$('#confirmpassword').val(),
-            '_token':$('#token').val()
-          };
+        var formData={
+          'name' : $('#name').val(),
+          'email':$('#email').val(),
+          'password':$('#password').val(),
+          'password_confirmation':$('#confirmpassword').val(),
+          '_token':$('#token').val()
+        };
 
 
-          $.ajax({
-            url: '/register/',
-            type: 'POST',
-            data: formData,
-            success: function(data) {
+        $.ajax({
+          url: '/register/',
+          type: 'POST',
+          data: formData,
+          success: function(data) {
 
-              Materialize.toast('Signed In Succesfully', 4000,'rounded')
-              $('#signup').closeModal();
+            Materialize.toast('Signed In Succesfully', 4000,'rounded')
+            $('#signup').closeModal();
 
-            },
-            error: function(e) {
+          },
+          error: function(e) {
       //called when there is an error
       console.log(e);
       alert('data not added, !!');
@@ -756,9 +760,9 @@ $(document).ready(function()
   });
 
 
-          console.log(formData);
+        console.log(formData);
 
 
-        };
+      };
 
-        </script>
+      </script>
