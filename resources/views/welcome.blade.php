@@ -10,22 +10,27 @@
       <link href="{{asset('/css/materialize.min.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
       <link href="{{asset('/css/pikaday.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
 
+      <style>
+      .rot {
+        -ms-transform: rotate(-20deg); /* IE 9 */
+        -webkit-transform: rotate(-20deg); /* Safari */
+        transform: rotate(-20deg); /* Standard syntax */
+      }
+
+      </style>
+
       <script src="https://code.highcharts.com"></script>
-      <!-- <link href="{{asset('/css/bootstrap-slider.min.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/> -->
-        <!-- <link href="{{asset('/css/nouislider.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
-        <link href="{{asset('/css/nouislider.tooltips.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/>
-        <link href="{{asset('/css/nouislider.pips.css')}}" type="text/css" rel="stylesheet" media="screen,projection"/> -->
+  
 
 
       </head>
       <body>
 
-        <!-- <div class="container"> -->
-        <!-- <div class="row"> -->  
+      
 
         <div  class="row">
 
-          <div class="col s2 ">
+          <div class="col s2 " >
            <ul  id= "menu" class="collapsible" data-collapsible="accordion">
             <li>
               <div class="collapsible-header"><i class="material-icons">filter_drama</i>Dengue </div>
@@ -58,45 +63,79 @@
 
       <div id ="registerform" class="col s2" style="display:none;">
         <form >
-          <div class="row">
-            <div class="input-field col s12">
-              <input placeholder="Location" id="location" type="text" class="validate">
-              <!-- <label for="location">Location</label> -->
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <select id="type">
-                <!-- <option value="" disabled selected>Choose your option</option> -->
-                <option value="mosquito">Mosquito Bite</option>
-                <option value="dog">Dog Bite</option>
-              </select>
-            </div>
-
+           <div class="row">
+            
+            
           </div>
 
           <div class="row">
             <div class="input-field col s12">
-              <input placeholder="lat" id="lat" type="text" class="validate">
-              <!-- <label for="lat">Lat</label> -->
+              <input placeholder="Location" id="location" type="text" class="validate truncate">
+              <label for="Location">Location</label>
+            </div>
+          </div>
+
+
+           <div class="row">
+            <div class="input-field col s6 ">
+              <input placeholder="lat" id="lat" type="text" class="validate truncate" >
+              
+              <label for="lat">Lat</label>
+            </div>
+            <div class="input-field col s6">
+              <input placeholder="lng" id="lng" type="text" class="validate truncate">
+                            <label for="lng">Long</label>
+
+
             </div>
 
+
           </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input placeholder="lng" id="lng" type="text" class="validate">
-              <!-- <label for="lng">Long</label> -->
+
+
+          <div class="row" id= "type">
+            <div class="col s6">
+            <input name="group1" type="radio"  value ="mosquito" id="test1" checked />
+
+              <label for="test1">Mosquito</label>
             </div>
 
+              <div class="col s6">
+              <input name="group1"  type="radio" value ="dog"  id="test2" />
+            
+              <label for="test2">Dog</label>
+            </div>
+
+
           </div>
-          <div class="col  l5 blue-text text-darken-2 ">
-            <input type="date" class="datepicker center-align" value="<?php echo date("d-M-Y"); ?>" id="idate" placeholder="Date" style="margin:5px;">
-          </div>
+
           <div class="row">
 
-            <button type="button" onclick="saveData(); return false;" class="waves-effect waves-light btn">Save</button>
-            <button type="button" onclick="back(); return false;" class="waves-effect waves-light btn">Back</button>
+             
+            <div class="col s6  blue-text  ">
+               <p style="font-size:17px">Date:</p>
+            </div>
+            <div class="col s6   blue-text text-darken-2 no-padding">
+              <input placeholder="idate" type="date" class="datepicker tooltipped center-align" data-position="bottom" data-delay="50" data-tooltip="Click here to input date of the day you got bitten" value="<?php echo date("d-M-Y"); ?>" id="idate">
+            </div>
+           
 
+          
+          </div>
+
+         
+
+         
+          
+          <div class="row">
+
+            <div class="divider"></div>
+            
+          <div class="section">
+            <button type="button" onclick="saveData(); return false;" class=" btn tooltipped waves-effect waves-light btn col s5 right" data-position="bottom" data-delay="50" data-tooltip="Click me to Save Current Information filled">Save</button>
+            <button type="button" onclick="back(); return false;" class="waves-effect tooltipped waves-light btn col s5 left" data-position="bottom" data-delay="50" data-tooltip="Click me to go back to previous panel">Back</button>
+
+          </div>
           </div>
 
         </form>
@@ -108,20 +147,16 @@
 
 
 
-      <!-- signup Modal Structure -->
 
-      <div  class="col s10 " id="graphContainer" style="height: 400px; width: 1100px;display:none">
-
-      </div>
+      
 
 
 
       <div class="col s10 no-padding" style="height: 78%;">
         <div class="row">
 
-          <div class="col s3" style="position:relative;z-index:1;">
-            <!-- <div class="row"> -->
-            <!-- <div class="col l6 s6 no-padding " > -->
+          <div  id = "datepanel" class="col s3" style="position:relative;z-index:1;">
+           
             <div class="row card-panel  hoverable  no-padding">
               <div class="col s5 no-padding ">
 
@@ -139,39 +174,41 @@
 
             </div>
           </div>
+          <div  class="col s10  no-padding" id="graphContainer" style="height: 400px;display:none">
 
-          <div class="col s10 no-padding" id ="maap" style="position:absolute;height:96%;margin-right:2px;border:1px solid black;" >
+      </div>
 
-
-            <script>
-
-            var map = null;
-            var marker=null;
-            var markers=[];
-            var mosImage= "{{asset('/images/marker.png')}}";
-            var mapData=null;
-            var mapDataType="mosquito";
-            var heatmap=null;
-            var state= 0;
-
-            function initMap() {
-              var myLatLng = {lat: 28.54539, lng: 77.188181};
-              map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 17,
-                disableDefaultUI:true,
-                center:myLatLng,
-                zoomControl:true,
-                rotateControl:true
-              });
+          <div class="col s10 no-padding "  style="position:absolute;height:96%;" >
+            <div class="col s12 center  no-padding" id ="map" style="height:100%;" >
 
 
-              marker = new google.maps.Marker({
-                position: myLatLng,
-                map: map,
-                title: 'IIT Delhi',
-                draggable: true,
-              });
-      // getLocation();
+              <script>
+
+              var map = null;
+              var marker=null;
+              var markers=[];
+              var mosImage= "{{asset('/images/marker.png')}}";
+              var mapData=null;
+              var mapDataType="mosquito";
+              var heatmap=null;
+              var state= 0;
+
+              function initMap() {
+                var myLatLng = {lat: 28.54539, lng: 77.188181};
+                map = new google.maps.Map(document.getElementById('map'), {
+                  zoom: 16,
+                  center:myLatLng,
+                  zoomControl:true,
+                  rotateControl:true,
+                });
+
+
+                marker = new google.maps.Marker({
+                  position: myLatLng,
+                  map: map,
+                  title: 'IIT Delhi',
+                  draggable: true,
+                });
     }
 
     function getLocation() {
@@ -203,23 +240,26 @@
   </div>
 </div>
 </div>
+</div>
 </div>  
 
 
 
 
-<footer style="margin-bottom:0px;bottom:0px; position:fixed; width:100%" >
+<footer  class= "orange" style="margin-bottom:0px;bottom:0px; position:fixed; width:100%" >
   <div class="page-footer orange footer-copyright ">
-    <div class="container" style="text-align:right">
-      Made by <a class="orange-text text-lighten-4" >Nikhil Kumar</a>
+    <div class="col s6 left orange">
+      An Smart Campus Initiative <a class=" black-text" >IIT-Delhi</a>
+    </div>
+
+    <div class="col s6 right orange">
+      Made by <a class="blue-text text-lighten-4" >Nikhil Kumar</a>
     </div>
   </div>
 </footer>
 
 
-<!-- </div> -->
 
-<!-- </div> -->
 
 
 </body>
@@ -241,6 +281,7 @@
 $(document).ready(function()
 {
 
+  $('.tooltipped').tooltip({delay: 50});
 
 
 
@@ -255,9 +296,7 @@ $(document).ready(function()
 
   });
   $("#sdate").on('change',function(){
-            // var date=$('#sdate').val();
-            // var newdate = $('#sdate').val().split("-").reverse().join("-");
-            // console.log(newdate);
+          
             if(state==0)
             {
               getData(mapDataType);
@@ -296,7 +335,6 @@ $(document).ready(function()
   });
 
   $("#reloadMap2").on('click', function() {
-            // console.log('cbekvbhwv');
 
             document.getElementById("map").style.display = "";
             document.getElementById("graphContainer").style.display = "none"
@@ -308,13 +346,6 @@ $(document).ready(function()
           });
 
 
-      // $('.datepicker').pickadate({
-      //   selectMonths: true,
-      //   selectYears: 10,
-      //   startDate:'1-1-2015',
-      //   format: 'dd-mmm-yyyy',
-      //   defaultdate: 'toady'
-      // });
     var picker1 = new Pikaday({ field: document.getElementById('sdate'),
       format: 'D-MMM-YYYY',
       defaultDate:'today' });
@@ -329,10 +360,6 @@ $(document).ready(function()
 
 
 
-      //       $('.datepicker').pickadate({
-      //   selectMonths: true, // Creates a dropdown to control month
-      //   selectYears: 15 // Creates a dropdown of 15 years to control year
-      // });
 
     $("#reloadGraph1").on('click', function() {
             // console.log('cbekvbhwv');
@@ -600,6 +627,8 @@ $(document).ready(function()
   {
     document.getElementById("registerform").style.display = "none";
     document.getElementById("menu").style.display = "";
+    document.getElementById("datepanel").style.display = "";
+
 
   }
 
@@ -613,18 +642,9 @@ $(document).ready(function()
         }
 
         document.getElementById("menu").style.display = "none";
+                document.getElementById("datepanel").style.display = "none";
         document.getElementById("registerform").style.display = "";
 
-     // $('#map').locationpicker({
-     //  location: {latitude: 28.549013499998987, longitude: 77.18317139999999}, 
-     //  radius: 10,
-     //  inputBinding: {
-     //        latitudeInput: $('#lat'),
-     //        longitudeInput: $('#lng'),
-     //        radiusInput: $('#radius'),
-     //        locationNameInput: $('#location')
-     //    }
-     //  });
     google.maps.event.addListener(map, 'click', function(event) {                
             //Get the location that the user clicked.
             var clickedLocation = event.latLng;
@@ -648,15 +668,6 @@ $(document).ready(function()
               }
 
 
-    //         var circle = new google.maps.Circle({
-    //   map: map,
-    //   radius: 5,    // 10 miles in metres
-    //   fillColor: '#AA0000'
-    // });
-    // circle.bindTo('center', marker, 'position');
-
-
-            //Get the marker's location.
             markerLocation();
           });
   }
@@ -686,8 +697,7 @@ $(document).ready(function()
 
       function saveData() {
 
-          // event.preventDefault();
-          //$('#radius').val()
+         
           var formData={
             'type' : $('#type').val(),
             'lat':$('#lat').val(),
@@ -702,7 +712,8 @@ $(document).ready(function()
             success: function(data) {
       // console.log(data);
         // addData(data);
-        alert('data added');
+        // alert('data added');
+        Materialize.toast('Saved!', 4000, 'rounded')
 
       },
       error: function(e) {
@@ -749,15 +760,5 @@ $(document).ready(function()
 
 
         };
-
-        </script>
-
-        <script>
-        $(document).ready(function(){
-        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-        $('.modal-trigger').leanModal();
-        $(".button-collapse").sideNav();
-        // $('.collapsible').collapsible();
-      });
 
         </script>
