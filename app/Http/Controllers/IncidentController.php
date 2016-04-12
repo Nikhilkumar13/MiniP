@@ -17,23 +17,10 @@ class IncidentController extends Controller
 	public function getMapData(Request $request)
 	{
 		$type=$request->get('type');
-		// $date=date_create('2-3-2016');
-		// return $request->get('sdate');
-		// return $date;
-        // return $date;
 
-		// return date_format(date_create( "'".$request->get('sdate')."'").' ',"Y-m-d");;
-		// return $request->get('sdate');
 		 $startdate=$request->get('sdate');
 		 $enddate=$request->get('edate');
-		  // $stringdate= "'" .$request->get('sdate')."'";
-		 // $sdate=date_create("'".$request->get('sdate')."'");
-		 // return date_create("'".$request->get('sdate')."'");
-
-		// $startdate= date_format(date_create($sdate),"Y-m-d");
-        // return  $startdate;
-		// $enddate= date_format(date_create($edate),"Y-m-d");
-		// return $enddate;
+	
 
 
 		$data=DB::select('select * from incidents where created_at between '."'".$startdate."'" .' and '."'" .$enddate ."'".'  and type = '."'".$type."'",[]  );

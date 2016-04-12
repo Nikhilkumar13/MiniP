@@ -26,7 +26,7 @@
     </head>
     <body>
 
-      
+
 
       <div  class="row">
 
@@ -62,11 +62,14 @@
 
 
     <div id ="registerform" class="col s2" style="display:none;">
-      <form >
-       <div class="row">
-        
-        
-       </div>
+      <form class="formValidate" id="formdata">
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input  data-error="User Id required! "name="uid" placeholder="User Id" id="uid" type="text" class="validate truncate">
+          <label for="uid">User Id</label>
+        </div>
+      </div>
 
        <div class="row">
         <div class="input-field col s12">
@@ -93,15 +96,15 @@
       </div>
 
 
-      <div class="row" id= "type">
+      <div class="row" >
         <div class="col s6">
-          <input name="group1" type="radio"  value ="mosquito" id="test1" checked />
+          <input name="typegroup" type="radio"  value ="mosquito"  id="test1" checked />
 
           <label for="test1">Mosquito</label>
         </div>
 
         <div class="col s6">
-          <input name="group1"  type="radio" value ="dog"  id="test2" />
+          <input name="typegroup"  type="radio" value ="dog"  id="test2" />
           
           <label for="test2">Dog</label>
         </div>
@@ -111,7 +114,7 @@
 
       <div class="row">
 
-       
+
         <div class="col s6  blue-text  ">
          <p style="font-size:17px">Date:</p>
        </div>
@@ -148,17 +151,20 @@
 
 
 
-<div  class="col s10  no-padding" id="graphContainer" style="height: 400px; display:none">
+<div  class="col s10  no-padding"  id="graphContainer" style="height: 400px; display:none">
+  <div class="col s11 card "  id="graph" style="height:100%">
+
+  </div>
 
 </div>
 
 
 
-<div class="col s10 no-padding" style="height: 78%;">
+<div class="col s10 no-padding ">
   <div class="row">
 
-    <div  id = "datepanel" class="col s3" style="position:relative;z-index:1;">
-     
+    <div  id = "datepanel" class="col s3" style="position:relative;z-index:1; margin-top:10px">
+
       <div class="row card-panel  hoverable  no-padding">
         <div class="col s5 no-padding ">
 
@@ -177,8 +183,8 @@
       </div>
     </div>
 
-    <div class="col s10 no-padding "  style="position:absolute;height:96%;" >
-      <div class="col s12 center  no-padding" id ="map" style="height:100%;" >
+    <div class="col s10 no-padding card"  style="position:absolute;height:95%;" >
+      <div class="col s12 center   no-padding" id ="map" style="height:100%;" >
 
 
         <script>
@@ -197,6 +203,7 @@
           map = new google.maps.Map(document.getElementById('map'), {
             zoom: 16,
             center:myLatLng,
+            dafaultUI:false,
             zoomControl:true,
             rotateControl:true,
           });
@@ -274,11 +281,12 @@
 
 
 
+
 <script >
+$( document ).ready(function() {
 
 
-$(document).ready(function()
-{
+
 
   $('.tooltipped').tooltip({delay: 50});
 
@@ -287,7 +295,9 @@ $(document).ready(function()
   $("#reloadMap1").on('click', function() {
     document.getElementById("map").style.display = "";
     document.getElementById("graphContainer").style.display = "none"
+    document.getElementById("datepanel").style.display = "";
 
+    mapDataType='mosquito';
 
     getData(mapDataType);
 
@@ -295,7 +305,7 @@ $(document).ready(function()
 
   });
   $("#sdate").on('change',function(){
-    
+
     if(state==0)
     {
       getData(mapDataType);
@@ -337,6 +347,8 @@ $(document).ready(function()
 
     document.getElementById("map").style.display = "";
     document.getElementById("graphContainer").style.display = "none"
+    mapDataType='dog';
+    console.log(mapDataType);
 
     getData(mapDataType);
 
@@ -397,10 +409,8 @@ $(document).ready(function()
 
     <script src="{{asset('/js/materialize.js')}}"></script>
     <script src="{{asset('js/init.js')}}"></script>
-    <script src="{{asset('/js/locationpicker.jquery.js')}}"></script>
     <script src="{{asset('/js/jquery.canvasjs.min.js')}}"></script>
     <script src="{{asset('/js/canvasjs.min.js')}}"></script>
-    <script src="{{asset('/js/bootstrap-slider.min.js')}}"></script>
 
     <script>
 
@@ -416,6 +426,8 @@ $(document).ready(function()
       state=1;
       document.getElementById("map").style.display = "none";
       document.getElementById("graphContainer").style.display = ""; 
+      document.getElementById("datepanel").style.display = "none";
+
 
       var syear=$('#sdate').val().split("-")[2];
       var eyear=$('#edate').val().split("-")[2];
@@ -437,7 +449,16 @@ $(document).ready(function()
        formateddata.push(d);
      }
       // console.log(formateddata);
-      plotGraph(formateddata);
+      if(type=="dog")
+      {
+        plotGraph(formateddata ," Dog  Cases TimeLine");
+
+      }
+      else
+      {
+        plotGraph(formateddata , "Dengue Cases TimeLine");
+
+      }
 
 
       // setMapOnAll(map);
@@ -453,31 +474,31 @@ $(document).ready(function()
 
 
 
-          }
+        }
 
-          function plotGraph(data)
+        function plotGraph(data , title)
+        {
+
+          var chart = new CanvasJS.Chart("graph",
           {
+            theme: "theme1",
+            title:{
+              text: title
+            },
+            animationEnabled: true,
+            axisX: {
+              valueFormatString: "MMM",
+              interval:1,
+              intervalType: "month"
 
-            var chart = new CanvasJS.Chart("graphContainer",
-            {
-              theme: "theme1",
-              title:{
-                text: "Dengue Cases"
-              },
-              animationEnabled: true,
-              axisX: {
-                valueFormatString: "MMM",
-                interval:1,
-                intervalType: "month"
+            },
+            axisY:{
+              includeZero: false
 
-              },
-              axisY:{
-                includeZero: false
-
-              },
-              data: [
-              {        
-                type: "line",
+            },
+            data: [
+            {        
+              type: "line",
             //lineThickness: 3,        
             dataPoints: data
           }
@@ -485,40 +506,39 @@ $(document).ready(function()
           ]
         });
 
-            chart.render();
+          chart.render();
 
-          }
-
-
-          function getData(type) {
-            state=0;
+        }
 
 
-            var month= {'Jan':1, 'Feb':2, 'Mar':3, 'Apr':4, 'May':5, 'Jun':6, 'Jul':7, 'Aug':8, 'Sep':9, 'Oct':10, 'Nov':11, 'Dec':12};
-            var arr1= $('#sdate').val().split("-");
-            var arr2= $('#edate').val().split("-");
-
-            arr1[1]=month[arr1[1]];
-            arr2[1]=month[arr2[1]];
+        function getData(type) {
+          state=0;
 
 
-            var sdate= arr1.reverse().join("-");;
-            var edate= arr2.reverse().join("-");
-            console.log(sdate);
-            console.log(edate);
-            var dataobj= {'type':type,'sdate':sdate,'edate':edate};
 
-            $.ajax({
-              url: '/mapdata/',
-              type: 'GET',
-              data: dataobj,
-              success: function(data) {
+          var sdate= moment($('#sdate').val(),'D-MMM-YYYY').format('YYYY-MM-DD');
+          var edate= moment($('#edate').val(),'D-MMM-YYYY').format('YYYY-MM-DD');
+          console.log(sdate);
+          console.log(edate);
+          var dataobj= {'type':type,'sdate':sdate,'edate':edate};
+
+          $.ajax({
+            url: '/mapdata/',
+            type: 'GET',
+            data: dataobj,
+            success: function(data) {
       // console.log(data);
       mapData=data;
       mapDataType=type;
       setMapOnAll(null);
       setData(data);
-      heatmap.setMap(null);
+
+
+      try {
+       heatmap.setMap(null);}
+       catch(err) {
+        console.log("error handled");
+      }
       // setMapOnAll(map);
     },
     error: function(e) {
@@ -527,31 +547,33 @@ $(document).ready(function()
     }
 
   });
-          }
+        }
 
-          function showHeatMap(type)
-          {
-           state=2;
-           document.getElementById("map").style.display = "";
-           document.getElementById("graphContainer").style.display = "none";
+        function showHeatMap(type)
+        {
+         state=2;
+         document.getElementById("map").style.display = "";
+         document.getElementById("graphContainer").style.display = "none";
+         document.getElementById("datepanel").style.display = "";
 
 
-           var month= {'Jan':1, 'Feb':2, 'Mar':3, 'Apr':4, 'May':5, 'Jun':6, 'Jul':7, 'Aug':8, 'Sep':9, 'Oct':10, 'Nov':11, 'Dec':12};
-           var arr1= $('#sdate').val().split("-");
-           var arr2= $('#edate').val().split("-");
 
-           arr1[1]=month[arr1[1]];
-           arr2[1]=month[arr2[1]];
-           var sdate= arr1.reverse().join("-");;
-           var edate= arr2.reverse().join("-");
+         var month= {'Jan':1, 'Feb':2, 'Mar':3, 'Apr':4, 'May':5, 'Jun':6, 'Jul':7, 'Aug':8, 'Sep':9, 'Oct':10, 'Nov':11, 'Dec':12};
+         var arr1= $('#sdate').val().split("-");
+         var arr2= $('#edate').val().split("-");
 
-           var dataobj= {'type':type,'sdate':sdate,'edate':edate};
+         arr1[1]=month[arr1[1]];
+         arr2[1]=month[arr2[1]];
+         var sdate= arr1.reverse().join("-");;
+         var edate= arr2.reverse().join("-");
 
-           $.ajax({
-            url: '/mapdata/',
-            type: 'GET',
-            data: dataobj,
-            success: function(data) {
+         var dataobj= {'type':type,'sdate':sdate,'edate':edate};
+
+         $.ajax({
+          url: '/mapdata/',
+          type: 'GET',
+          data: dataobj,
+          success: function(data) {
       // console.log(data);
       mapData=data;
       mapDataType=type;
@@ -706,13 +728,17 @@ $(document).ready(function()
 
       }
 
+
+
       function saveData() {
 
-       
+
         var formData={
-          'type' : $('#type').val(),
+          'type' : $('input[name=typegroup]:checked').val(),
           'lat':$('#lat').val(),
           'lng':$('#lng').val(),
+          'uid':$('#uid').val(),
+          'date':moment($('#idate').val(),'D-MMM-YYYY').format('YYYY-MM-DD'),
           'radius': 5         
         };
         console.log(formData);

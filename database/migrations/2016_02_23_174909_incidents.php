@@ -15,10 +15,10 @@ class Incidents extends Migration
           Schema::create('incidents', function (Blueprint $table) {
             $table->increments('id');
             $table->string('type');
+            $table->string('uid');
             $table->double('lat',18,15);
             $table->double('lng',18,15);
-            $table->double('radius',7,3);
-            $table->timestamps();
+            $table->timestamp('created_at');
         });
         //
     }
