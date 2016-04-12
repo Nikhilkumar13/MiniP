@@ -645,14 +645,21 @@ $(document).ready(function()
         document.getElementById("registerform").style.display = "";
         document.getElementById("graphContainer").style.display = "none"; 
         document.getElementById("map").style.display = ""; 
-        heatmap.setMap(null);
+
+
+        try {
+         heatmap.setMap(null);}
+         catch(err) {
+          console.log("error handled");
+        }
+        
 
 
 
-        google.maps.event.addListener(map, 'click', function(event) {                
-            //Get the location that the user clicked.
-            var clickedLocation = event.latLng;
-            console.log(event);
+        google.maps.event.addListener(map, 'click', function(event) {           
+ //Get the location that the user clicked.
+ var clickedLocation = event.latLng;
+ console.log(event);
             //If the marker hasn't been added.
             if(marker === false){
                 //Create the marker.
