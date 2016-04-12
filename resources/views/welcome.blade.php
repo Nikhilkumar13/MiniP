@@ -25,11 +25,11 @@
 
 
     </head>
-    <body>
+    <body style="overflow-x:scroll;">
 
 
 
-      <div  class="row">
+      <div  class="row" >
 
         <div class="col s2 " >
          <ul  id= "menu" class="collapsible" data-collapsible="accordion">
@@ -37,18 +37,18 @@
             <div class="collapsible-header active"><i class="material-icons">bug_report</i>Dengue Cases </div>
             <div class="collapsible-body">
               <ul>
-                <li class="collapsible-header" style="margin-left:40px"><a type="button"  id ="reloadMap1"><i class="material-icons">places</i>Show Map</a></li>
-                <li class="collapsible-header" style="margin-left:35px" ><a type="button"  id ="reloadGraph1"><i class="material-icons">trending_up</i>Graphs</a></li>
-                <li class="collapsible-header" style="margin-left:35px" ><a type="button"  id ="reloadHeatMap1"><i class="material-icons">layers</i>Heat Maps</a></li>
+                <li class="collapsible-header" style="margin-left:20px"><a type="button"  id ="reloadMap1"><i class="material-icons">places</i>Locate victim</a></li>
+                <li class="collapsible-header" style="margin-left:20px" ><a type="button"  id ="reloadGraph1"><i class="material-icons">trending_up</i>Graphs</a></li>
+                <li class="collapsible-header" style="margin-left:20px" ><a type="button"  id ="reloadHeatMap1"><i class="material-icons">layers</i>Heat Maps</a></li>
               </ul>
             </div>
           </li>
           <li>
             <div class="collapsible-header"><i class="material-icons">pets</i>Dog Bites</div>
             <div class="collapsible-body"><ul>
-              <li class="collapsible-header" style="margin-left:40px"><a type="button"  id ="reloadMap2"><i class="material-icons">places</i>Show Map</a></li>
-              <li class="collapsible-header" style="margin-left:35px" ><a type="button"  id ="reloadGraph2"><i class="material-icons">trending_up</i>Graphs</a></li>
-              <li class="collapsible-header" style="margin-left:35px" ><a type="button"  id ="reloadHeatMap2"><i class="material-icons">layers</i>Heat Maps</a></li>
+              <li class="collapsible-header" style="margin-left:20px"><a type="button"  id ="reloadMap2"><i class="material-icons">places</i>Locate victim</a></li>
+              <li class="collapsible-header" style="margin-left:20px" ><a type="button"  id ="reloadGraph2"><i class="material-icons">trending_up</i>Graphs</a></li>
+              <li class="collapsible-header" style="margin-left:20px" ><a type="button"  id ="reloadHeatMap2"><i class="material-icons">layers</i>Heat Maps</a></li>
             </ul>
           </div>
         </li>
@@ -153,7 +153,7 @@
 
 
   <div  class="col s10  no-padding"  id="graphContainer" style="height: 400px; display:none">
-    <div class="col s11 card "  id="graph" style="height:100%">
+    <div class="col s11 card "  id="graph" style="height:100%;  width:200%">
 
     </div>
 
@@ -184,8 +184,8 @@
         </div>
       </div>
 
-      <div class="col s10 no-padding card"  style="position:absolute;height:95%;" >
-        <div class="col s12 center   no-padding" id ="map" style="height:100%;" >
+      <div class="col s10 no-padding "  id= "mapcontainer" style="position:absolute;height:95%;" >
+        <div class="col s12 center   card no-padding" id ="map" style="height:100%;" >
 
 
           <script>
@@ -296,6 +296,7 @@ $( document ).ready(function() {
 
 
   $("#reloadMap1").on('click', function() {
+    document.getElementById("mapcontainer").style.display = "";
     document.getElementById("map").style.display = "";
     document.getElementById("graphContainer").style.display = "none"
     document.getElementById("datepanel").style.display = "";
@@ -348,7 +349,9 @@ $( document ).ready(function() {
 
   $("#reloadMap2").on('click', function() {
 
+
     document.getElementById("map").style.display = "";
+        document.getElementById("mapcontainer").style.display = "";
     document.getElementById("graphContainer").style.display = "none"
     mapDataType='dog';
     console.log(mapDataType);
@@ -428,6 +431,8 @@ $( document ).ready(function() {
     function showGraph(type)
     {
       state=1;
+          document.getElementById("mapcontainer").style.display = "none";
+
       document.getElementById("map").style.display = "none";
       document.getElementById("graphContainer").style.display = ""; 
       document.getElementById("datepanel").style.display = "none";
@@ -560,6 +565,8 @@ $( document ).ready(function() {
           function showHeatMap(type)
           {
            state=2;
+               document.getElementById("mapcontainer").style.display = "";
+
            document.getElementById("map").style.display = "";
            document.getElementById("graphContainer").style.display = "none";
            document.getElementById("datepanel").style.display = "";
@@ -672,6 +679,7 @@ $( document ).ready(function() {
         document.getElementById("datepanel").style.display = "none";
         document.getElementById("registerform").style.display = "";
         document.getElementById("graphContainer").style.display = "none"; 
+            document.getElementById("mapcontainer").style.display = "";
         document.getElementById("map").style.display = ""; 
 
 
@@ -694,7 +702,7 @@ $( document ).ready(function() {
                 marker = new google.maps.Marker({
                   position: clickedLocation,
                   map: map,
-                    draggable: true //make it draggable
+                    draggable: false //make it draggable
                   });
                 //Listen for drag events!
                 google.maps.event.addListener(marker, 'dragend', function(event){
