@@ -14,9 +14,12 @@ class Incidents extends Model
     {
 
         $this->lat = $request->input('lat');
-        $this->uid = $request->input('uid');
+        $this->uid = 'cs1120238';
         $this->lng = $request->input('lng');
         $this->type = $request->input('type');
+        $this->age = $request->input('age');
+        $this->comment = $request->input('comment');
+        $this->gender = $request->input('gender');
         $this->created_at=date($request->input('date') ." 0:0:0");
         $this->save();
 

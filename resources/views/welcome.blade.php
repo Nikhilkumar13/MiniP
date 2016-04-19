@@ -18,6 +18,16 @@
         transform: rotate(-20deg); /* Standard syntax */
       }
 
+      .gm-style-iw {
+   width: 400px !important;
+   top: 20px !important;
+   left: 20px !important;
+   background-color: #fff;
+   box-shadow: 0 1px 6px rgba(178, 178, 178, 0.6);
+   border: 2px solid rgba(72, 181, 233, 0.6);
+   border-radius: 2px 2px 10px 10px;
+}
+
       </style>
 
       <script src="https://code.highcharts.com"></script>
@@ -25,7 +35,7 @@
 
 
     </head>
-    <body style="overflow-x:scroll;">
+    <body >
 
 
 
@@ -37,7 +47,7 @@
             <div class="collapsible-header active"><i class="material-icons">bug_report</i>Dengue Cases </div>
             <div class="collapsible-body">
               <ul>
-                <li class="collapsible-header" style="margin-left:20px"><a type="button"  id ="reloadMap1"><i class="material-icons">places</i>Locate victim</a></li>
+                <li class="collapsible-header" style="margin-left:20px"><a type="button"  id ="reloadMap1"><i class="material-icons">places</i>Location</a></li>
                 <li class="collapsible-header" style="margin-left:20px" ><a type="button"  id ="reloadGraph1"><i class="material-icons">trending_up</i>Graphs</a></li>
                 <li class="collapsible-header" style="margin-left:20px" ><a type="button"  id ="reloadHeatMap1"><i class="material-icons">layers</i>Heat Maps</a></li>
               </ul>
@@ -46,7 +56,7 @@
           <li>
             <div class="collapsible-header"><i class="material-icons">pets</i>Dog Bites</div>
             <div class="collapsible-body"><ul>
-              <li class="collapsible-header" style="margin-left:20px"><a type="button"  id ="reloadMap2"><i class="material-icons">places</i>Locate victim</a></li>
+              <li class="collapsible-header" style="margin-left:20px"><a type="button"  id ="reloadMap2"><i class="material-icons">places</i>Location</a></li>
               <li class="collapsible-header" style="margin-left:20px" ><a type="button"  id ="reloadGraph2"><i class="material-icons">trending_up</i>Graphs</a></li>
               <li class="collapsible-header" style="margin-left:20px" ><a type="button"  id ="reloadHeatMap2"><i class="material-icons">layers</i>Heat Maps</a></li>
             </ul>
@@ -63,24 +73,18 @@
 
 
     <div id ="registerform" class="col s2" style="display:none;">
-      <form class="formValidate" id="formdata">
+      <form class="formValidate" id="formdata" style="">
 
+       
         <div class="row">
           <div class="input-field col s12">
-            <input  data-error="User Id required! "name="uid" placeholder="User Id" id="uid" type="text" class="validate truncate">
-            <label for="uid">User Id</label>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="input-field col s12">
-            <input placeholder="Location" id="location" type="text" class="validate truncate">
-            <label for="Location">Location</label>
+            <input  data-error="Age required! "name="age" placeholder="Your Age" id="age" type="text" class="validate truncate">
+            <label for="age">User Age</label>
           </div>
         </div>
 
 
-        <div class="row">
+        <div class="row" style="display:none">
           <div class="input-field col s6 ">
             <input placeholder="lat" id="lat" type="text" class="validate truncate" >
 
@@ -95,6 +99,25 @@
 
 
         </div>
+
+
+
+        <div class="row" >
+          <div class="col s6">
+            <input name="gendergroup"  type="radio"  value ="male"  id="genderm" checked />
+
+            <label for="genderm">Male</label>
+          </div>
+
+          <div class="col s6">
+            <input name="gendergroup"  type="radio" value ="female"  id="genderf" />
+
+            <label for="genderf">Female</label>
+          </div>
+
+
+        </div>
+
 
 
         <div class="row" >
@@ -127,6 +150,13 @@
 
       </div>
 
+      <div class="row">
+        <div class="input-field col s12" >
+          <textarea id="commentbox" class="materialize-textarea" length="120" ></textarea>
+          <label for="commentbox">Comment Box</label>
+        </div>
+      </div>
+
 
 
 
@@ -136,8 +166,8 @@
         <div class="divider"></div>
 
         <div class="section">
-          <button type="button" onclick="saveData(); return false;" class=" btn tooltipped waves-effect waves-light btn col s5 right" data-position="bottom" data-delay="50" data-tooltip="Click me to Save Current Information filled">Save</button>
-          <button type="button" onclick="back(); return false;" class="waves-effect tooltipped waves-light btn col s5 left" data-position="bottom" data-delay="50" data-tooltip="Click me to go back to previous panel">Back</button>
+          <button type="button" onclick="saveData(); return false;" class=" btn waves-effect waves-light btn col s5 right" data-position="bottom" data-delay="50" data-tooltip="Click me to Save Current Information filled">Save</button>
+          <button type="button" onclick="back(); return false;" class="waves-effect waves-light btn col s5 left" data-position="bottom" data-delay="50" data-tooltip="Click me to go back to previous panel">Back</button>
 
         </div>
       </div>
@@ -292,6 +322,8 @@ $( document ).ready(function() {
 
 
   $('.tooltipped').tooltip({delay: 50});
+   $( 'textarea#commentbox').characterCounter();
+   $('.materialboxed').materialbox();
 
 
 
@@ -308,6 +340,7 @@ $( document ).ready(function() {
 
 
   });
+
   $("#sdate").on('change',function(){
 
     if(state==0)
@@ -351,7 +384,7 @@ $( document ).ready(function() {
 
 
     document.getElementById("map").style.display = "";
-        document.getElementById("mapcontainer").style.display = "";
+    document.getElementById("mapcontainer").style.display = "";
     document.getElementById("graphContainer").style.display = "none"
     mapDataType='dog';
     console.log(mapDataType);
@@ -431,7 +464,7 @@ $( document ).ready(function() {
     function showGraph(type)
     {
       state=1;
-          document.getElementById("mapcontainer").style.display = "none";
+      document.getElementById("mapcontainer").style.display = "none";
 
       document.getElementById("map").style.display = "none";
       document.getElementById("graphContainer").style.display = ""; 
@@ -565,7 +598,7 @@ $( document ).ready(function() {
           function showHeatMap(type)
           {
            state=2;
-               document.getElementById("mapcontainer").style.display = "";
+           document.getElementById("mapcontainer").style.display = "";
 
            document.getElementById("map").style.display = "";
            document.getElementById("graphContainer").style.display = "none";
@@ -631,6 +664,96 @@ $( document ).ready(function() {
 
       }
 
+
+
+
+      function attachSecretMessage(marker, secretMessage) {
+        console.log(secretMessage['age']);
+
+        var content=   '<div class="row" style="margin-bottom:0px">'+
+                              '<div class="col s12">'+
+                                  ' <div class="row no-padding"  style="margin-bottom:0px" >'+
+                                        '<div class="col s12 ">'+
+                                            '<div class=" col s6 ">'+
+                                                '<p style="text-align:left" >'+
+                                                  'Gender: '+secretMessage['gender'] +
+                                                '</p>'+
+                                                '<p style="text-align:left">'+ 
+                                                    'Age: '+secretMessage['age'] +
+                                                '</p>'+
+                                                '<p style="text-align:left" >'+
+                                                  ' Date: '+secretMessage['created_at']+
+                                                '</p>'+
+                                              '</div>'+
+
+                                        '<div class=" col s6 ">'+
+                                            '<img class= "materialboxed" src="{{asset("images/mosquito1.png")}}">'+
+                                        '</div>'+
+
+                                      '</div>'+
+
+                                  '<div class=" col s12 ">'+
+                                      '<div class="col s12">'+
+                                          '<div class="card-panel  hoverable ">'+
+                                              '<p > '+
+                                                secretMessage['comment']+
+                                              '</p>'+
+
+                                            '</div>'+
+
+                                        '</div>'+
+                                    '</div>'+
+
+                                  '</div>'+
+                              '</div>'+
+                            '</div>';
+  var infowindow = new google.maps.InfoWindow({
+    content: content
+  });
+
+  marker.addListener('click', function() {
+    infowindow.open(marker.get('map'), marker);
+  });
+
+  google.maps.event.addListener(infowindow, 'domready', function() {
+
+   // Reference to the DIV which receives the contents of the infowindow using jQuery
+   var iwOuter = $('.gm-style-iw');
+
+   /* The DIV we want to change is above the .gm-style-iw DIV.
+    * So, we use jQuery and create a iwBackground variable,
+    * and took advantage of the existing reference to .gm-style-iw for the previous DIV with .prev().
+    */
+   var iwBackground = iwOuter.prev();
+
+   // Remove the background shadow DIV
+   iwBackground.children(':nth-child(2)').css({'display' : 'none'});
+
+   // Remove the white background DIV
+   iwBackground.children(':nth-child(4)').css({'display' : 'none'});
+
+   var iwCloseBtn = iwOuter.next();
+
+// Apply the desired effect to the close button
+iwCloseBtn.css({
+  opacity: '1', // by default the close button has an opacity of 0.7
+  right: '24px', top: '10px', // button repositioning
+   border: '0px solid #48b5e9', // increasing button border and new color
+  'border-radius': '2px', // circular effect
+  'box-shadow': '0 0 5px #3990B9' // 3D effect to highlight the button
+  });
+
+// The API automatically applies 0.7 opacity to the button after the mouseout event.
+// This function reverses this event to the desired value.
+iwCloseBtn.mouseout(function(){
+  $(this).css({opacity: '1'});
+});
+
+});
+
+}
+
+
       function setData(locations) {
 
        console.log(locations);
@@ -638,11 +761,13 @@ $( document ).ready(function() {
 
        for(var i=0; i<locations.length;i++)
        {
-        markers.push(new google.maps.Marker({ position: locations[i],
+
+        var datamarker=new google.maps.Marker({ position: locations[i],
           map: map,
-          title: 'Dengue',
           icon: mosImage,
-        }));
+        });
+        attachSecretMessage(datamarker,locations[i]); 
+        markers.push(datamarker);
       }
 
     }
@@ -679,7 +804,7 @@ $( document ).ready(function() {
         document.getElementById("datepanel").style.display = "none";
         document.getElementById("registerform").style.display = "";
         document.getElementById("graphContainer").style.display = "none"; 
-            document.getElementById("mapcontainer").style.display = "";
+        document.getElementById("mapcontainer").style.display = "";
         document.getElementById("map").style.display = ""; 
 
 
@@ -711,13 +836,18 @@ $( document ).ready(function() {
               } else{
                 //Marker has already been added, so just change its location.
                 console.log("yo");
+                marker.setTitle("");
                 marker.setPosition(clickedLocation);
+
               }
 
 
               markerLocation();
             });
       }
+
+
+
 
       function markerLocation(){
         //Get location.
@@ -732,6 +862,7 @@ $( document ).ready(function() {
           latLng: currentLocation
         }, function(responses) {
           if (responses && responses.length > 0) {
+            marker.setTitle(''+responses[0].formatted_address);
             document.getElementById('location').value=responses[0].formatted_address;
             console.log(responses);
 
@@ -749,9 +880,11 @@ $( document ).ready(function() {
 
         var formData={
           'type' : $('input[name=typegroup]:checked').val(),
+          'gender' : $('input[name=gendergroup]:checked').val(),
           'lat':$('#lat').val(),
           'lng':$('#lng').val(),
-          'uid':$('#uid').val(),
+          'age':$('#age').val(),
+          'comment':$('#commentbox').val(),
           'date':moment($('#idate').val(),'D-MMM-YYYY').format('YYYY-MM-DD'),
           'radius': 5         
         };

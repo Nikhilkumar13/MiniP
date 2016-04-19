@@ -23,7 +23,7 @@ class IncidentController extends Controller
 	
 
 
-		$data=DB::select('select * from incidents where created_at between '."'".$startdate."'" .' and '."'" .$enddate ."'".'  and type = '."'".$type."'",[]  );
+		$data=DB::select('select lat, lng, gender, age, comment, created_at, url from incidents where created_at between '."'".$startdate."'" .' and '."'" .$enddate ."'".'  and type = '."'".$type."'",[]  );
 
 		return $data;
 	}

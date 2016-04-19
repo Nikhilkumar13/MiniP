@@ -14,8 +14,12 @@ class Incidents extends Migration
     {
           Schema::create('incidents', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('type');
-            $table->string('uid');
+            $table->string('type',10);
+            $table->string('uid',10);
+            $table->string('gender',7);
+            $table->string('comment',250);
+            $table->string('url',100);
+            $table->integer('age');
             $table->double('lat',18,15);
             $table->double('lng',18,15);
             $table->timestamp('created_at');
