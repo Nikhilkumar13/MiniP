@@ -31,9 +31,15 @@ class IncidentController extends Controller
 	public function getGraphData(Request $request)
 	{
 		$type=$request->get('type');
-		$startyear=$request->get('syear');
-		$endyear=$request->get('eyear');
-		$data=DB::select('select year(created_at) as Year , month(created_at) as Month, count(*) as Count  from incidents where year(created_at) between ' .$startyear. ' and ' . $endyear .' and type = '."'".$type."'". ' group by year(created_at),month(created_at) ;');
+		$startdate=$request->get('sdate');
+		$enddate=$request->get('edate');
+		$data=[];
+			
+		$data=DB::select('select date(created_at) as date ,count(date(created_at)) as Count  from incidents where created_at between ' ."'".$startdate."'" .' and '."'" .$enddate ."'".' and type = '."'".$type."'". ' group by date(created_at) ;');
+
+		 // select date(created_at) as date , count(date(created_at)) as Count from incidents where created_at between '2016-1-1' and '2016-5-1' and type= 'mosquito' group by  date(created_at);
+
+
 
 		return $data;
 	}
