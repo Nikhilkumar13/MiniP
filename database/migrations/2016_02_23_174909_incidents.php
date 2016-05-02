@@ -18,6 +18,7 @@ class Incidents extends Migration
             $table->string('uid',10);
             $table->string('gender',7);
             $table->string('comment',250);
+            $table->string('location',100);
             $table->string('url',100);
             $table->integer('age');
             $table->double('lat',18,15);

@@ -18,6 +18,8 @@ Route::get('/try', function () {
     return view('try');
 });
 Route::get('/mapdata/', 'IncidentController@getMapData');
+Route::get('/mycasedata/', 'IncidentController@getMyCaseData');
+Route::put('/mycasedata/', 'IncidentController@deleteMyCaseData');
 Route::get('/graphdata/', 'IncidentController@getGraphData');
 Route::post('/savedata/','IncidentController@saveData');
 Route::get('/map', function () {
