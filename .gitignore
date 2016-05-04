@@ -1,6 +1,6 @@
 /vendor
 /node_modules
+/public/caseimage
 Homestead.yaml
 Homestead.json
 .env
-todo.txt

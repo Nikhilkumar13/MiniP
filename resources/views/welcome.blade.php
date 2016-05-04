@@ -73,7 +73,8 @@
 
 
   <div id ="registerform" class="col s2" style="display:none;">
-    <form class="formValidate" id="formdata" style="">
+    <!-- <form class="formValidate" id="formdata" style=""> -->
+    {!! Form::open(array('id'=>'formdata','class'=>'formValidate')) !!}
 
 
       <div class="row">
@@ -270,7 +271,7 @@
     </div>
   </div>
 
-</form>
+{!! Form::close() !!}
 </div>
 
 
@@ -1059,6 +1060,8 @@ iwCloseBtn.mouseout(function(){
         formData.append( 'age',$('#age').val());
         formData.append( 'date',moment($('#idate').val(),'D-MMM-YYYY').format('YYYY-MM-DD'));
         formData.append( 'comment', $('#commentbox').val());
+        formData.append( '_token', $('input[name=_token]').val());
+
 // Main magic with files here
 formData.append('image', $('input[type=file]')[0].files[0]);
 console.log(formData);
